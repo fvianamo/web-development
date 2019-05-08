@@ -45,9 +45,16 @@ var app = new function(){
 				respCell = row.insertCell(1);
 				prazoCell = row.insertCell(2);
 
-				descCell.innerHTML = this.tasks[i].desc;
-				respCell.innerHTML = this.tasks[i].resp;
-				prazoCell.innerHTML = this.tasks[i].prazo;
+				if (!this.tasks[i].done) {
+					descCell.innerHTML = '<strike>'+this.tasks[i].desc+'</strike>';
+					respCell.innerHTML = '<strike>'+this.tasks[i].resp+'</strike>';
+					prazoCell.innerHTML = '<strike>'+this.tasks[i].prazo+'</strike>';
+				}
+				else{
+					descCell.innerHTML = this.tasks[i].desc;
+					respCell.innerHTML = this.tasks[i].resp;
+					prazoCell.innerHTML = this.tasks[i].prazo;
+				}
 
 			}
 		}
