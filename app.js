@@ -9,7 +9,7 @@ var app = new function(){
 				desc: "Tarefa 1",
 				resp: "Ze Junior",
 				prazo: "2019-01-01",
-				done: true
+				done: false
 			} ;
 			this.tasks.push(task);
 			task = {
