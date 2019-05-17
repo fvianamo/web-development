@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="TodoApp-2019.css">
+</head>
+<body>
+
+<div class="header">
+  <h1>Lista de tarefas a fazer</h1>
+</div>
+
+<div class="row">
+
+<div class="col-3 col-s-3 menu">
+ <div class="row">
+    <label>Tarefa: </label>
+    <input id="tarefa" type="text">
+ </div>
+ <div class="row">
+    <label>Responsável: </label>
+    <input id="responsavel" type="text">
+ </div>
+ <div class="row">
+     <br>
+     <input type="button" id="addbtn" value="Adicionar">
+ </div>
+</div>
+
+<div class="col-3 col-s-12">
+  <h1>A fazer</h1>
+    <ul id="incomplete-tasks">
+    </ul>
+</div>
+    
+<div class="col-3 col-s-12">
+  <h1>Feito</h1>
+      <ul id="completed-tasks">
+        <li>Aqui ficam as tarefas completadas</li>
+          <li>Você deve completar</li>
+      </ul>
+</div>
+<div class="col-3 col-s-12">
+  <div class="aside">
+    <h1>Explore!</h1>
+    <p>Esse exemplo é para você procurar entender e melhorar. Tem muito a ser feito. Use-o como base para aprender HTML, CSS, JS, Ajax e JSON</p>
+  </div>
+</div>
+</div>
+
+<div class="footer">
+  <p>Exemplo ilustrativo para a turma de Desenvolvimento Web.</p>
+</div>
+
+<script type="text/javascript" src="TodoApp-2019-json.js"></script>
+    
+</body>
+</html>
