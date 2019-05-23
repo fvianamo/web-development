@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TODO list</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+	<h3 align="center">TODO List</h3>
+	<table style="width: 60%" align="center">
+		<tbody>
+			<tr>
+				<th>Descrição:</th>
+				<th><input type="text" id="desc"></th>
+			</tr>
+			<tr>
+				<th>Responsável:</th>
+				<th><input type="text" id="resp"></th>
+			</tr>
+			<tr>
+				<th>prazo:</th>
+				<th><input type="date" id="prazo"></th>
+			</tr>
+			<tr>
+				<th> <button onclick="app.add()">Adicionar</button> </th>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<table style="width: 80%" align="center">
+		<thead>
+			<tr>
+				<th>Tarefa</th>
+				<th>Responsavel</th>
+				<th>Prazo</th>
+			</tr>
+		</thead>
+		<tbody  id="todo-list">
+			<!list goes here>
+		</tbody>
+	</table>
+</body>
+<script type="text/javascript" src="app.js"></script>
+</html>

@@ -106,3 +106,4 @@ var app = new function(){
 		}
 	}
 app.initialize();
+
