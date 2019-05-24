@@ -1,6 +1,22 @@
 var app = new function(){
 	//Initicializa as variaveis
 	this.tasks = [];
+
+	this.CORSRequest = function createCORSRequest(method, url) {
+		var xhr = new XMLHttpRequest();
+	  	if ("withCredentials" in xhr) {
+	    	// XHR for Chrome/Firefox/Opera/Safari.
+	    	xhr.open(method, url, true);
+	  	} else if (typeof XDomainRequest != "undefined") {
+	    	// XDomainRequest for IE.
+	    	xhr = new XDomainRequest();
+	    	xhr.open(method, url);
+	  	} else {
+	    	// CORS not supported.
+	    	xhr = null;
+	  	}
+	  	return xhr;
+	}
 	
 	//função que inicializa as primeiras tasks, ao abrir a página
 	this.initialize = function(){
@@ -13,11 +29,8 @@ var app = new function(){
 		ajax.onreadystatechange = function() {
 			if(ajax.readyState == 4 && ajax.status == 200){
 				var data = JSON.parse(ajax.responseText);
-				//console.log(data);
 				app.tasks = data;
-				// console.log(a);
 				app.list_all();
-				//console.log(app.tasks);
 			}
 		};			
 	}
@@ -56,13 +69,9 @@ var app = new function(){
 			done: false
 		};
 		
-		var ajax = new XMLHttpRequest();
+		var ajax = this.CORSRequest('POST', 'http://localhost:5000/task');
 
-		ajax.open('POST', 'http://localhost:5000/task', true);
-		ajax.setRequestHeader("Content-type", "application/json");
-		ajax.setRequestHeader("Access-Control-Allow-Origin", "*");
-		ajax.setRequestHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-
+		ajax.setRequestHeader("Content-Type", "application/json");
 		ajax.send(JSON.stringify(_task));
 
 		ajax.onreadystatechange = function() {
@@ -70,15 +79,12 @@ var app = new function(){
 				var data = JSON.parse(ajax.responseText);
 				app.tasks = data;
 				app.list_all();
-				console.log(data);
 			}
 		}
 
 		document.getElementById('desc').value = '';
 		document.getElementById('resp').value = '';
 		document.getElementById('prazo').value = '';
-
-		this.list_all();
 	}
 
 	//função que edita task da lista
@@ -89,30 +95,71 @@ var app = new function(){
 		document.getElementById('prazo').value = '';
 		
 		var _task = this.tasks[parseInt(event.srcElement.value)];
-		this.tasks.splice(parseInt(event.srcElement.value),1);
+
+		var requ = {
+			"id": parseInt(event.srcElement.value)
+		}
+
+		var ajax = this.CORSRequest('DELETE', 'http://localhost:5000/task');
+
+		ajax.setRequestHeader("Content-Type", "application/json");
+		ajax.send(JSON.stringify(requ));
+
+		ajax.onreadystatechange = function() {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				var data = JSON.parse(ajax.responseText);
+				app.tasks = data;
+				app.list_all();
+			}
+		}
 
 		document.getElementById('desc').value = _task.desc;
 		document.getElementById('resp').value = _task.resp;
 		document.getElementById('prazo').value = _task.prazo;
-
-		this.list_all();
 	}
 
 	//função que move a task para o próximo estado
 	this.done = function(){
-		//console.log(event.srcElement.value);
 		var _task = this.tasks[parseInt(event.srcElement.value)];
 		_task.done = true;
-		this.tasks.splice(parseInt(event.srcElement.value),1);
-		this.tasks.push(_task);
-		this.list_all();
+		
+		var requ = {
+			"id": parseInt(event.srcElement.value),
+			"task": _task
+		};
+
+		var ajax = this.CORSRequest('PUT', 'http://localhost:5000/task');
+
+		ajax.setRequestHeader("Content-Type", "application/json");
+		ajax.send(JSON.stringify(requ));
+
+		ajax.onreadystatechange = function() {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				var data = JSON.parse(ajax.responseText);
+				app.tasks = data;
+				app.list_all();
+			}
+		}
+		
 	}
 
 	//função que remove a task da lista
 	this.delete = function(){
-		//console.log(event.srcElement.value);
-		this.tasks.splice(parseInt(event.srcElement.value),1);
-		this.list_all();
+		var requ = {
+			"id": parseInt(event.srcElement.value)
+		}
+
+		var ajax = this.CORSRequest('DELETE', 'http://localhost:5000/task');
+
+		ajax.send(JSON.stringify(requ));
+
+		ajax.onreadystatechange = function() {
+			if (ajax.readyState == 4 && ajax.status == 200) {
+				var data = JSON.parse(ajax.responseText);
+				app.tasks = data;
+				app.list_all();
+			}
+		}
 	}
 }
 app.initialize();

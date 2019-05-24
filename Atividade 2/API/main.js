@@ -1,12 +1,14 @@
 //Imports
 var express = require('express');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 var fs = require('fs');
 
 //Inicializa app
 var app = express();
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(cors()); //cors enable
 
 var tasks = new Array();
 
@@ -17,14 +19,11 @@ var readFile = function () {
 var writeFile = function(tasks) {
 	fs.writeFile('tasks.txt', JSON.stringify(tasks), function (err) {
   		if (err) throw err;
-  		//console.log('Saved!');
 	}); 
 };
 
 var getTasks = function (req, res){
 	tasks = readFile();
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.send(tasks);
 };
 
@@ -36,11 +35,8 @@ var addTask = function (req, res){
 		"done": req.body.done
 	};
 	tasks = readFile();
-	//console.log(tasks);
 	tasks.push(task);
 	writeFile(tasks);
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.send(tasks);
 };
 
@@ -49,22 +45,13 @@ var alterTask = function (req, res){
 	var _task = tasks[parseInt(req.body.id)];
 	tasks.splice(parseInt(req.body.id),1);
 
-	if (req.body.task.desc != null)
-		_task['desc'] = req.body.task.desc;
-
-	if (req.body.task.resp != null)
-		_task['resp'] = req.body.task.resp;
-
-	if (req.body.task.prazo != null)
-		_task['prazo'] = req.body.task.prazo;
-
-	if (req.body.task.done != null)
-		_task['done'] = req.body.task.done;
+	_task.desc = req.body.task.desc;
+	_task.resp = req.body.task.resp;
+	_task.prazo = req.body.task.prazo;
+	_task.done = req.body.task.done;
 
 	tasks.push(_task);
 	writeFile(tasks);
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.send(tasks);
 };
 
@@ -72,8 +59,6 @@ var deleteTask = function (req, res){
 	tasks = readFile();
 	tasks.splice(parseInt(req.body.id),1);
 	writeFile(tasks);
-	res.header("Access-Control-Allow-Origin", "*");
-  	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.send(tasks);
 };
 
