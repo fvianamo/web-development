@@ -45,13 +45,13 @@ var app = new function(){
 				document.getElementById('todo-list').innerHTML += '<tr><td>' + this.tasks[i].desc 
 				+ '</td><td>' + this.tasks[i].resp 
 				+ '</td><td>' + this.tasks[i].prazo 
-				+ '</td><td><button onclick="app.done()" value="' + i + '">feito</button></td><td><button onclick="app.edit()" value="' + i + '">edit</button></td><td><button onclick="app.delete()" value="' + i + '">deletar</button></td></tr>';
+				+ '</td><td><div class="btn-group" role="group"><button class="btn btn-success" onclick="app.done()" value="' + i + '">feito</button><button class="btn btn-warning" onclick="app.edit()" value="' + i + '">edit</button><button class="btn btn-danger" onclick="app.delete()" value="' + i + '">deletar</button></div></td></tr>';
 			}
 			else{
 				document.getElementById('todo-list').innerHTML += '<tr><td><strike>' + this.tasks[i].desc 
 				+ '</strike></td><td><strike>' + this.tasks[i].resp 
 				+ '</strike></td><td><strike>' + this.tasks[i].prazo 
-				+ '</strike></td><td><button onclick="app.done()" value="' + i + '">feito</button></td><td><button onclick="app.edit()" value="' + i + '">edit</button></td><td><button onclick="app.delete()" value="' + i + '">deletar</button></td></tr>';
+				+ '</strike></td><td><div class="btn-group" role="group"><button class="btn btn-success" onclick="app.done()" value="' + i + '">feito</button><button class="btn btn-warning" onclick="app.edit()" value="' + i + '">edit</button><button class="btn btn-danger" onclick="app.delete()" value="' + i + '">deletar</button></div></td></tr>';
 			}
 		}
 	}

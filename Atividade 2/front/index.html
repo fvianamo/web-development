@@ -3,41 +3,65 @@
 <head>
 	<title>TODO list</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h3 align="center">TODO List</h3>
-	<table style="width: 60%" align="center">
-		<tbody>
-			<tr>
-				<th>Descrição:</th>
-				<th><input type="text" id="desc"></th>
-			</tr>
-			<tr>
-				<th>Responsável:</th>
-				<th><input type="text" id="resp"></th>
-			</tr>
-			<tr>
-				<th>prazo:</th>
-				<th><input type="date" id="prazo"></th>
-			</tr>
-			<tr>
-				<th> <button onclick="app.add()">Adicionar</button> </th>
-			</tr>
-		</tbody>
-	</table>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-auto">
+				<h1>TODO <small>list</small></h1>
+			</div>
+		</div>
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+				<label for="descricao">Descrição:</label>
+			</div>
+			<div class="col col-lg-2">
+				<input type="text" name="descricao" id="desc">
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+				<label for="descricao">Responsável:</label>
+			</div>
+			<div class="col col-lg-2">
+				<input type="text" name="responsavel" id="resp">
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-2">
+				<label for="descricao">Prazo:</label>
+			</div>
+			<div class="col col-lg-2">
+				<input type="date" name="prazo" id="prazo">
+			</div>
+		</div>
+		<div class="row justify-content-md-center">
+			<div class="col col-lg-4">
+				<button class="btn btn-primary btn-lg btn-block" onclick="app.add()">Adicionar</button>
+			</div>
+		</div>
+	</div>
 	<br>
-	<table style="width: 80%" align="center">
-		<thead>
-			<tr>
-				<th>Tarefa</th>
-				<th>Responsavel</th>
-				<th>Prazo</th>
-			</tr>
-		</thead>
-		<tbody  id="todo-list">
-			<!list goes here>
-		</tbody>
-	</table>
+	<div class="container">
+		<div class="col col-lg-12">
+			<table style="width: 80%" align="center" class="table table-sm">
+				<thead class="thead-dark">
+					<tr>
+						<th style="width: 40%">Tarefa</th>
+						<th style="width: 20%">Responsavel</th>
+						<th style="width: 20%">Prazo</th>
+						<th style="width: 20%">Ações</th>
+					</tr>
+				</thead>
+				<tbody  id="todo-list">
+					<!list goes here>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 <script type="text/javascript" src="app.js"></script>
 </html>
